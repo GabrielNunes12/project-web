@@ -1,7 +1,11 @@
 package com.training.Project.WebApp1.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +19,9 @@ public class User implements Serializable {
   private String email;
   private String phoneNumber;
   private String password;
+  @JsonIgnore
+  @OneToMany(mappedBy = "client")
+  private static List<Order> orderList = new ArrayList<>();
 
   public User() {
   }
@@ -63,6 +70,9 @@ public class User implements Serializable {
     return password;
   }
 
+  public static List<Order> getOrderList() {
+    return orderList;
+  }
   public void setPassword(String password) {
     this.password = password;
   }
