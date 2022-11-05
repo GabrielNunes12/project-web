@@ -18,7 +18,7 @@ public class Order implements Serializable {
   private Integer id;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
   private Instant moment;
-  private OrderStatus orderStatus;
+  private Integer orderStatus;
   @ManyToOne
   @JoinColumn(name = "client_id")
   private User client;
@@ -29,7 +29,7 @@ public class Order implements Serializable {
   public Order(Integer id, Instant moment, OrderStatus orderStatus, User user) {
     this.id = id;
     this.moment = moment;
-    this.orderStatus = orderStatus;
+    setOrderStatus(orderStatus);
     this.client = user;
   }
 
@@ -50,11 +50,11 @@ public class Order implements Serializable {
   }
 
   public OrderStatus getOrderStatus() {
-    return orderStatus;
+    return OrderStatus.valueOf(orderStatus);
   }
 
   public void setOrderStatus(OrderStatus orderStatus) {
-    this.orderStatus = orderStatus;
+    this.orderStatus = orderStatus.getCode();
   }
 
   public double total() {
