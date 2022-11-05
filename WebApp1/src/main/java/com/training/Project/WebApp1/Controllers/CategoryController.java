@@ -21,8 +21,8 @@ public class CategoryController {
   private CategoryServices categoryServices;
   @GetMapping(value = "/findAll")
   public ResponseEntity<List<Category>> findAll() {
-    List<Category> listUser = categoryServices.findAll();
-    return ResponseEntity.ok().body(listUser);
+    List<Category> listCategory = categoryServices.findAll();
+    return ResponseEntity.ok().body(listCategory);
   }
 
   //Request with an ID parameter to return only that record from database.
