@@ -3,7 +3,9 @@ package com.training.Project.WebApp1.Model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -13,9 +15,8 @@ public class Category implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String categoryProduct;
-  @OneToMany
-  @JoinColumn(name = "product_id")
-  private List<Product> productList = new ArrayList<>();
+  @Transient
+  private Set<Product> products = new HashSet<>();
 
   public Category() {
   }
@@ -36,7 +37,7 @@ public class Category implements Serializable {
   public void setCategoryProduct(String categoryProduct) {
     this.categoryProduct = categoryProduct;
   }
-  public List<Product> getList() {
-    return this.productList;
+  public Set<Product> getProducts() {
+    return this.products;
   }
 }

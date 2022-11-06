@@ -2,9 +2,12 @@ package com.training.Project.WebApp1.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "tb_product")
 public class Product implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +16,8 @@ public class Product implements Serializable {
   private String description;
   private Double price;
   private String imageUrl;
+  @Transient
+  private Set<Category> categories = new HashSet<>();
 
   public Product() {
   }
@@ -23,6 +28,10 @@ public class Product implements Serializable {
     this.description = description;
     this.price = price;
     this.imageUrl = imageUrl;
+  }
+
+  public Set<Category> getCategories() {
+    return categories;
   }
 
   public Integer getId() {
