@@ -48,6 +48,9 @@ public class TestConfig implements CommandLineRunner {
     Product product = new Product(null, "Gambler", "a nice book", 1200.00, "src/images");
     Product product2 = new Product(null, "RAM memory", "3400MHz 8gb", 200.00, "src/images.jpg");
     Product product3 = new Product(null, "Wardrobe", "Huge wardrobe, plenty of space", 2999.00, "src/images.png");
+    product.getCategories().add(category);
+    product2.getCategories().add(category2);
+    product3.getCategories().add(category3);
     categoryRepository.saveAll(Arrays.asList(category, category2, category3));
     productRepository.saveAll(Arrays.asList(product, product2, product3));
     userRepository.saveAll(Arrays.asList(user1, user2));
