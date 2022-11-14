@@ -1,14 +1,8 @@
 package com.training.Project.WebApp1.Config;
 
 import com.training.Project.WebApp1.Enum.OrderStatus;
-import com.training.Project.WebApp1.Model.Category;
-import com.training.Project.WebApp1.Model.Order;
-import com.training.Project.WebApp1.Model.Product;
-import com.training.Project.WebApp1.Model.User;
-import com.training.Project.WebApp1.Repositories.CategoryRepository;
-import com.training.Project.WebApp1.Repositories.OrderRepository;
-import com.training.Project.WebApp1.Repositories.ProductRepository;
-import com.training.Project.WebApp1.Repositories.UserRepository;
+import com.training.Project.WebApp1.Model.*;
+import com.training.Project.WebApp1.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,8 @@ public class TestConfig implements CommandLineRunner {
 
   @Autowired
   private ProductRepository productRepository;
+  @Autowired
+  private OrderItemRepository orderItemRepository;
 
 
   //seeding
@@ -48,6 +44,10 @@ public class TestConfig implements CommandLineRunner {
     Product product = new Product(null, "Gambler", "a nice book", 1200.00, "src/images");
     Product product2 = new Product(null, "RAM memory", "3400MHz 8gb", 200.00, "src/images.jpg");
     Product product3 = new Product(null, "Wardrobe", "Huge wardrobe, plenty of space", 2999.00, "src/images.png");
+    OrderItem orderItem = new OrderItem(order, product, 2, product.getPrice());
+    OrderItem orderItem2 = new OrderItem(order, product2, 1, product.getPrice());
+    OrderItem orderItem3 = new OrderItem(order, product3, 3, product.getPrice());
+    orderItemRepository.saveAll(Arrays.asList(orderItem,orderItem2,orderItem3));
     product.getCategories().add(category);
     product2.getCategories().add(category2);
     product3.getCategories().add(category3);
